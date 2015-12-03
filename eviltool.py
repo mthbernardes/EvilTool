@@ -43,6 +43,8 @@ while page <= pages:
                         arq.writelines(url_test+ "\n")
                         arq.close
                     print
+        pages = payload['metadata']['pages']
+        page += 1
             except:
                 cprint("[!] - HOST PROVAVELMENTE INDISPONIVEL",'red','on_yellow')
                 print
