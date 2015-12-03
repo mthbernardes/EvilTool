@@ -12,4 +12,5 @@ https://www.censys.io/register
 
 #Get the API ID and Secret and put in the variables
 UID = YOUR API ID
+
 SECRET = YOUR SECRET
