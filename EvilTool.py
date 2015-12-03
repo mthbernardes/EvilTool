@@ -96,7 +96,7 @@ def test_conn(url):
         try:
             shel_shock_conn = requests.get(url, timeout=5, headers=user_agent ,allow_redirects=True)
             shel_shock_conn_status_code = shel_shock_conn.status_code
-            test_vuln(shel_shock_conn_status_code,shel_shock_conn)
+            test_vuln(shel_shock_conn_status_code,shel_shock_conn,url)
         except:
             pass
 
