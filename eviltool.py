@@ -34,7 +34,10 @@ while page <= pages:
                     cprint("[+] - CONECTADO COM SUCESSO",'green')
                     print("[!] - STATUS CODE: %d") %(sc)
                     if ss.content.find(acha) != -1:
-                        cprint("[+] - VULN3R4V3L P0RR4",'green','on_red')
+                        cprint("[+] - VULN3R4V3L",'green','on_red')
+                        arq = open('VULN3R4V3L.txt','w')
+                        arq.write(url_test"\n")
+                        arq.close
                     print
             except:
                 cprint("[!] - HOST PROVAVELMENTE INDISPONIVEL",'red','on_yellow')
