@@ -27,15 +27,15 @@ while page <= pages:
                 ss = requests.get(url_test, timeout=5, allow_redirects=True)
                 sc = ss.status_code
                 if sc != 200:
-                    cprint("[!] - FDP NAO CONECTOU",'red')
+                    cprint("[!] - ALGO DEU ERRADO",'red')
                     print("[!] - STATUS CODE: %d") %(sc)
                     print
                 else:
-                    cprint("[+] - AI CONECTO PORRA",'green')
+                    cprint("[+] - CONECTADO COM SUCESSO",'green')
                     print("[!] - STATUS CODE: %d") %(sc)
                     if ss.content.find(acha) != -1:
                         cprint("[+] - VULN3R4V3L P0RR4",'green','on_red')
                     print
             except:
-                cprint("[!] - DEU MERDA",'red','on_yellow')
+                cprint("[!] - HOST PROVAVELMENTE INDISPONIVEL",'red','on_yellow')
                 print
