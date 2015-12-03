@@ -31,12 +31,16 @@ while page <= pages:
                     print("[!] - STATUS CODE: %d") %(sc)
                     print
                 else:
-                    cprint("[+] - CONECTADO COM SUCESSO",'green')
+                    cprint("[+] - AI CONECTO PORRA",'green')
                     print("[!] - STATUS CODE: %d") %(sc)
+                    arq = open('4B3RT0S.txt','a')
+                    arq.writelines(url_test+"\n")
+                    arq.close
+
                     if ss.content.find(acha) != -1:
                         cprint("[+] - VULN3R4V3L",'green','on_red')
-                        arq = open('VULN3R4V3L.txt','w')
-                        arq.write(url_test"\n")
+                        arq = open('VULN3R4V3L.txt','a')
+                        arq.writelines(url_test+ "\n")
                         arq.close
                     print
             except:
