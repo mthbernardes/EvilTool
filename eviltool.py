@@ -31,7 +31,7 @@ while page <= pages:
                     print("[!] - STATUS CODE: %d") %(sc)
                     print
                 else:
-                    cprint("[+] - AI CONECTO PORRA",'green')
+                    cprint("[+] - SUCESSO NA CONEXAO",'green')
                     print("[!] - STATUS CODE: %d") %(sc)
                     arq = open('4B3RT0S.txt','a')
                     arq.writelines(url_test+"\n")
