@@ -6,8 +6,8 @@ import requests
 
 c = 0
 API_URL = "https://www.censys.io/api/v1"
-UID = "3794b78c-d46c-4f3a-8e60-f2ac7965bcc8"
-SECRET = "gChq1LkgD2PLoAkm6jlw7ShQOQ7f2p7A"
+UID = " "
+SECRET = " "
 
 pages = float('inf')
 page = 1
