@@ -147,7 +147,7 @@ def test_vuln(status_code,host_connection,url):
             cprint("[+] - Connection success",'green')
             print("[+] - Status Code: %d") %(status_code)
 
-            if host_connection.content.find('uid') != -1:
+            if host_connection.content.find('uid=') != -1:
                 cprint("[+] - Host Vuln3r4bl3",'green',attrs=['bold'])
                 arq = open('Vuln3r4bl3.txt','a')
                 arq.write(url+"\n")
