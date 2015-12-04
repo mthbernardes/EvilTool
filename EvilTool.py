@@ -1,8 +1,7 @@
 # coding=utf-8
 
 from termcolor import cprint
-import json
-import requests
+import json, requests, os
 
 c = 0
 API_URL = "https://www.censys.io/api/v1"
@@ -74,6 +73,7 @@ still present after the incorrect fix.
     ''','red')
 
 def menu():
+    os.system('clear')
     check_conf()
     banner()
     cprint('''
