@@ -73,7 +73,10 @@ still present after the incorrect fix.
     ''','red')
 
 def menu():
-    os.system('clear')
+    try:
+        os.system('clear')
+    except:
+        os.system('cls')
     check_conf()
     banner()
     cprint('''
