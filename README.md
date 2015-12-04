@@ -1,6 +1,9 @@
 # EvilTool
 Shellshock Test
 
+#Install lib google
+pip install google
+
 #Install lib termcolor
 pip install termcolor
 
