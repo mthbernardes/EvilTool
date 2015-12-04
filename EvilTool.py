@@ -159,6 +159,8 @@ def menu():
         cprint('[1] - Use Google as source','green')
         cprint('[2] - Use Censys as source','green')
         cprint('[0] - Back to main menu','green')
+        print
+        print
         source_option = raw_input('[+] - Chose a option[0-2]: ')
         if source_option == '1':
             search_google()
