@@ -114,7 +114,7 @@ def search(API_URL,UID,SECRET,page,pages):
         if res.status_code == 200:
             build_url(res_json)
         pages = res_json['metadata']['pages']
-        pages += 1
+        page += 1
 
 def build_url(res_json):
     c= 0
