@@ -11,6 +11,8 @@ pip install requests
 https://www.censys.io/register
 
 #Get the API ID and Secret and put in the variables
+https://censys.io/account
+
 UID = YOUR API ID
 
 SECRET = YOUR SECRET
