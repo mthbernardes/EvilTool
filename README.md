@@ -1,5 +1,5 @@
 # EvilTool
-Shellshock Test
+proof of concept, as it's possible to exploit the vulnerability ShellShock until today 
 
 #Install lib google
 pip install google
