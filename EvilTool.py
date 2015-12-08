@@ -3,6 +3,7 @@
 
 from termcolor import cprint
 import json, requests, os
+import google
 
 API_URL = "https://www.censys.io/api/v1"
 UID = ""
