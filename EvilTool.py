@@ -18,7 +18,7 @@ def arguments():
     parser = argparse.ArgumentParser(description = banner())
     parser.add_argument('-m', '--mode', action = 'store', dest = 'mode',required = True, help = 'Mode of search, use google, censys or single')
     parser.add_argument('-d', '--dork', action = 'store', dest = 'dork', default='filetype:cgi', required = False, help = 'Set the google dork.')
-    parser.add_argument('-p', '--proxy', action = 'store', dest = 'proxy',required = False, help = 'Set proxy Server to Google search')
+    parser.add_argument('-p', '--proxy', action = 'store', dest = 'proxy',required = False, help = 'Set proxy Server to Google search, or use auto to generate a list of proxies')
     parser.add_argument('-u', '--url', action = 'store', dest = 'url', required = False, help= 'Set URL to test ShellShock Vulnerability')
     args = parser.parse_args()
     if args.mode.lower() == 'google':
@@ -39,12 +39,12 @@ def arguments():
 def gen_proxy(dork):
     try:
             cprint ("[+] - Loading Proxies... - [+]",'blue')
-            url = requests.get("http://proxy.tekbreak.com/100/json")
+            url = requests.get("http://proxy.tekbreak.com/1000/json")
     except:
             cprint("[!] - Connection Error - [!]",'green', 'on_red')
             exit()
 
-    for i in range(1,100):
+    for i in range(1,1000):
         ip = json.loads(url.text)[i]['ip']
         port = json.loads(url.text)[i]['port']
         proxy_type = str(json.loads(url.text)[i]['type'])
