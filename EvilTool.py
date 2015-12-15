@@ -6,7 +6,6 @@ import json, requests, os
 import google
 import argparse
 import random
-import sys
 
 API_URL = "https://www.censys.io/api/v1"
 UID = ""
@@ -79,8 +78,12 @@ def search_google(dork,proxy):
         gen_proxy(dork)
 
     else:
-        for url in search(dork,ip=proxy,conn_type='http',lang='pt-br',tld='com.br',pause=random.uniform(1.3, 4.7)):
-            test_conn(url)
+        try:
+            for url in search(dork,ip=proxy,conn_type='http',lang='pt-br',tld='com.br',pause=random.uniform(1.3, 4.7)):
+                test_conn(url)
+        except Exception,e:
+            cprint('[!] - Error whiling using proxy '+proxy,'green','on_red')
+            print str(e)
         print
 
 def search(API_URL,UID,SECRET,page,pages):
