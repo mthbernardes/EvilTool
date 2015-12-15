@@ -36,23 +36,50 @@ def arguments():
     else:
         parser.print_help()
 
+def gen_proxy(dork):
+    try:
+            cprint ("[+] - Loading Proxies... - [+]",'blue')
+            url = requests.get("http://proxy.tekbreak.com/100/json")
+    except:
+            cprint("[!] - Connection Error - [!]",'green', 'on_red')
+            exit()
+
+    for i in range(1,100):
+        ip = json.loads(url.text)[i]['ip']
+        port = json.loads(url.text)[i]['port']
+        proxy_type = str(json.loads(url.text)[i]['type'])
+        proxy_type = proxy_type.lower()
+        proxy_auto(ip,port,proxy_type,dork)
+
+def proxy_auto(ip,port,proxy_type,dork):
+    from google import search
+    try:
+        proxy_url = str("%s:%s") %(ip,port)
+        cprint("[+] - Using Proxy "+proxy_url,'blue')
+        print
+        for url in search(dork,ip=proxy_url,conn_type=proxy_type,lang='pt-br',tld='com.br',pause=random.uniform(1.3, 4.7)):
+            test_conn(url)
+    except:
+        cprint('[!] - Error whiling using proxy '+proxy_url,'green','on_red')
+        print
+
 def single(url):
     test_conn(url)
 
 def search_google(dork,proxy):
-
     from google import search
     if proxy is None:
         for url in search(dork,lang='pt-br',tld='com.br',pause=random.uniform(2.3, 4.7)):
             test_conn(url)
         print
+
+    elif proxy == 'auto':
+        gen_proxy(dork)
+
     else:
         for url in search(dork,ip=proxy,conn_type='http',lang='pt-br',tld='com.br',pause=random.uniform(1.3, 4.7)):
             test_conn(url)
         print
-    cprint('[+] - GAME OVER - [+]','red','on_yellow')
-    cprint('[+] - PRESS ANY KEY - [+]','red','on_yellow')
-    raw_input()
 
 def search(API_URL,UID,SECRET,page,pages):
     check_conf()
