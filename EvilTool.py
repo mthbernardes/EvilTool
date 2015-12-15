@@ -6,6 +6,7 @@ import json, requests, os
 import google
 import argparse
 import random
+import sys
 
 API_URL = "https://www.censys.io/api/v1"
 UID = ""
@@ -59,8 +60,9 @@ def proxy_auto(ip,port,proxy_type,dork):
         print
         for url in search(dork,ip=proxy_url,conn_type=proxy_type,lang='pt-br',tld='com.br',pause=random.uniform(1.3, 4.7)):
             test_conn(url)
-    except:
+    except Exception,e:
         cprint('[!] - Error whiling using proxy '+proxy_url,'green','on_red')
+        print str(e)
         print
 
 def single(url):
