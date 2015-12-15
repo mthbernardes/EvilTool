@@ -5,7 +5,7 @@ from termcolor import cprint
 import json, requests, os
 import google
 import argparse
-
+import random
 
 API_URL = "https://www.censys.io/api/v1"
 UID = ""
@@ -40,13 +40,14 @@ def single(url):
     test_conn(url)
 
 def search_google(dork,proxy):
+
     from google import search
     if proxy is None:
-        for url in search(dork):
+        for url in search(dork,lang='pt-br',tld='com.br',pause=random.uniform(2.3, 4.7)):
             test_conn(url)
         print
     else:
-        for url in search(dork,ip=proxy,conn_type='http'):
+        for url in search(dork,ip=proxy,conn_type='http',lang='pt-br',tld='com.br',pause=random.uniform(1.3, 4.7)):
             test_conn(url)
         print
     cprint('[+] - GAME OVER - [+]','red','on_yellow')
