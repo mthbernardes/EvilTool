@@ -1,3 +1,4 @@
 requests
 termcolor
 git+https://github.com/mthbernardes/EvilTool.git
+lxml
