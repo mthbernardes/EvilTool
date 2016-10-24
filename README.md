@@ -7,11 +7,8 @@ pip install git+https://github.com/mthbernardes/google.git
 #Install lib termcolor
 pip install termcolor
 
-#Install lib requests
-pip install requests
-
-#If you already have requests, just upgrade it
-pip install requests --upgrade
+#Install dependencies
+pip install -r dependencies.txt
 
 #Create a account 
 https://www.censys.io/register
