@@ -4,9 +4,6 @@ proof of concept, as it's possible to exploit the vulnerability ShellShock until
 #Install lib google
 pip install git+https://github.com/mthbernardes/google.git
 
-#Install lib termcolor
-pip install termcolor
-
 #Install dependencies
 pip install -r dependencies.txt
 
